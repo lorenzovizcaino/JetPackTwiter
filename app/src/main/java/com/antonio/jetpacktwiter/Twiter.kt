@@ -2,6 +2,7 @@ package com.antonio.jetpacktwiter
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -10,10 +11,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,17 +44,20 @@ fun Twiter() {
     var contador1 by rememberSaveable {mutableStateOf(1)}
     var contador2 by rememberSaveable {mutableStateOf(1)}
     var contador3 by rememberSaveable {mutableStateOf(1)}
+    var boolean1 by rememberSaveable {mutableStateOf(true)}
+    var boolean2 by rememberSaveable {mutableStateOf(true)}
+    var boolean3 by rememberSaveable {mutableStateOf(true)}
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.Black)) {
+        .background(Color(0xFF161026))) {
         Row(modifier = Modifier.padding(10.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.profile),
                 contentDescription = "Icono Aris",
                 modifier = Modifier
                     .size(70.dp)
-                    .shadow(elevation = 3.dp, shape = CircleShape),
+                    .clip(shape = CircleShape),
             )
             Column(modifier = Modifier.padding(start = 10.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -79,36 +86,101 @@ fun Twiter() {
                         .clip(RoundedCornerShape(20.dp)),
                 )
                 Spacer(modifier = Modifier.size(10.dp))
-                Row(){
-                    Icon(painter = painterResource(id = R.drawable.ic_chat) ,
-                        contentDescription ="chat",
-                        tint = Color.White,
+                Row {
+
+                    if(boolean1){
+                        Icon(painter = painterResource(id = R.drawable.ic_chat) ,
+                            contentDescription ="chat",
+                            tint = Color.Gray,
+                            modifier=Modifier.clickable {
+                                boolean1=!boolean1
+                                contador1++
+                            }.weight(0.5f)
+
+                            )
+
+                        Text(text = "$contador1", color = Color.Gray,modifier=Modifier.weight(1f))
+
+                    }else{
+                        Icon(painter = painterResource(id = R.drawable.ic_chat_filled) ,
+                            contentDescription ="chat",
+                            tint = Color.Gray,
+                            modifier=Modifier.clickable {
+                                boolean1=!boolean1
+                                contador1--
+                            }.weight(0.5f)
 
                         )
-                    Text(text = "$contador1", color = Color.White)
-                    Spacer(modifier = Modifier.size(30.dp))
 
-                    Icon(painter = painterResource(id = R.drawable.ic_rt) ,
-                        contentDescription ="rt",
-                        tint = Color.Green,
+                        Text(text = "$contador1", color = Color.Gray,modifier=Modifier.weight(1f))
 
-                        )
-                    Text(text = "$contador2", color = Color.White)
-                    Spacer(modifier = Modifier.size(30.dp))
 
-                    Icon(painter = painterResource(id = R.drawable.ic_like) ,
-                        contentDescription ="like",
-                        tint = Color.Red,
+                    }
 
-                        )
-                    Text(text = "$contador3", color = Color.White)
-                    Spacer(modifier = Modifier.size(30.dp))
+                    if(boolean2){
+                        Icon(painter = painterResource(id = R.drawable.ic_rt) ,
+                            contentDescription ="rt",
+                            tint=Color.Gray,
+                            modifier = Modifier.clickable {
+                                boolean2=!boolean2
+                                contador2++;
+                            }.weight(0.5f)
+
+                            )
+
+                        Text(text = "$contador2", color = Color.Gray,modifier=Modifier.weight(1f))
+
+                    }else{
+                        Icon(painter = painterResource(id = R.drawable.ic_rt) ,
+                            contentDescription ="rt",
+                            tint = Color.Green,
+                            modifier = Modifier.clickable {
+                                boolean2=!boolean2
+                                contador2--;
+                            }.weight(0.5f)
+
+                            )
+
+                        Text(text = "$contador2", color = Color.Gray,modifier=Modifier.weight(1f))
+
+
+                    }
+
+
+                    if(boolean3){
+                        Icon(painter = painterResource(id = R.drawable.ic_like) ,
+                            contentDescription ="like",
+                            tint = Color.Red,
+                            modifier=Modifier.clickable {
+                                boolean3=!boolean3
+                                contador3++
+                            }.weight(0.5f)
+
+                            )
+
+                        Text(text = "$contador3", color = Color.Gray,modifier=Modifier.weight(1f))
+                    }else{
+                        Icon(painter = painterResource(id = R.drawable.ic_like_filled) ,
+                            contentDescription ="like",
+                            tint = Color.Red,
+                            modifier=Modifier.clickable {
+                                boolean3=!boolean3
+                                contador3--
+                            }.weight(0.5f)
+
+                            )
+
+                        Text(text = "$contador3", color = Color.Gray,modifier=Modifier.weight(1f))
+
+                    }
+
+                   // Spacer(modifier = Modifier.size(30.dp))
+
                 }
-
-
             }
 
         }
+       // Divider(modifier = Modifier.size(40.dp).background(Color.Gray))
     }
 
 }
